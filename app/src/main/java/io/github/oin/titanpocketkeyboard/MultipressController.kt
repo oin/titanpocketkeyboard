@@ -35,6 +35,10 @@ const val MPSUBST_TOGGLE_ALT = '\uFFF5'
  */
 const val MPSUBST_BACKTICK = '\uFFF7'
 /**
+ * A special value meaning that the substitution should be a circumflex accent character.
+ */
+const val MPSUBST_CIRCUMFLEX = '\uFFF8'
+/**
  * A special value meaning that the substitution should be the string ". ".
  */
 const val MPSUBST_STR_DOTSPACE = '\uFFF6'
@@ -112,6 +116,7 @@ class MultipressController(private val substitutions: Array<HashMap<Int, Array<C
 						e.getUnicodeChar(mstate).toChar()
 					}
 					MPSUBST_BACKTICK -> '`'
+					MPSUBST_CIRCUMFLEX -> '^'
 					in arrayOf('`', '´', '^', '¨', '~') -> KeyEvent.getDeadChar(substitution.code, e.unicodeChar).toChar()
 					else -> substitution
 				}
