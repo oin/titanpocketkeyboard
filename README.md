@@ -47,7 +47,7 @@ The characters in bold are the ones that are marked on the labels of the keys.
 | **`d`** |  | **`5`**, `∂`, `→`, `⇒` | _Right arrow_ |
 | **`f`** |  | **`6`**, `ƒ` | |
 | **`g`** |  | **`*`**, `•`, `·` | |
-| **`h`** |  | **`#`**, `²`, '♯' | _Left arrow_ |
+| **`h`** |  | **`#`**, `²`, `♯` | _Left arrow_ |
 | **`j`** |  | **`+`**, `=`, `≠`, `≈`, `±` | _Down arrow_ |
 | **`k`** |  | **`"`**, `%`, `‰`, `‱` | _Up arrow_ |
 | **`l`** |  | **`'`**, `` ` `` | _Right arrow_ |
