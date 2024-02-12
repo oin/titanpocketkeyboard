@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>shift</title>
+    <g id="shift" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="⇧" transform="translate(0.8242, 4.1641)" fill="#FFFFFF" fill-rule="nonzero">
+            <path d="M0,15.1757812 L15.1904297,0 L30.3515625,15.1757812 L22.7636719,15.1757812 L22.7490234,23.671875 L7.57324219,23.671875 L7.58789062,15.1757812 L0,15.1757812 Z M15.1904297,3.57421875 L6.09375,12.6416016 L10.1220703,12.6416016 L10.1074219,21.1376953 L20.2294922,21.1376953 L20.2441406,12.6416016 L24.2431641,12.6416016 L15.1904297,3.57421875 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

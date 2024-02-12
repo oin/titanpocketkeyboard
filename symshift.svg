@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>symshift</title>
+    <g id="symshift" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <line x1="15.5" y1="6.3228408" x2="15.5" y2="26.6771592" id="Line" stroke="#FFFFFF" stroke-width="3" stroke-linecap="square"></line>
+        <line x1="25.6771592" y1="16.5" x2="5.3228408" y2="16.5" id="Line-Copy" stroke="#FFFFFF" stroke-width="3" stroke-linecap="square"></line>
+        <path d="M17.747986,2.54377051 L18.5930271,3.5 L17.0152067,7 L13.9847933,7 L12.4069729,3.5 L13.252014,2.54377051 L17.747986,2.54377051 Z" id="Triangle" fill="#FFFFFF"></path>
+        <path d="M17.747986,27.5437705 L18.5930271,28.5 L17.0152067,32 L13.9847933,32 L12.4069729,28.5 L13.252014,27.5437705 L17.747986,27.5437705 Z" id="Triangle-Copy" fill="#FFFFFF" transform="translate(15.5, 28.5) rotate(-180) translate(-15.5, -28.5)"></path>
+        <path d="M30.747986,15.5437705 L31.5930271,16.5 L30.0152067,20 L26.9847933,20 L25.4069729,16.5 L26.252014,15.5437705 L30.747986,15.5437705 Z" id="Triangle-Copy-2" fill="#FFFFFF" transform="translate(28.5, 16.5) rotate(-270) translate(-28.5, -16.5)"></path>
+        <path d="M5.74798603,15.5437705 L6.5930271,16.5 L5.01520667,20 L1.98479333,20 L0.4069729,16.5 L1.25201397,15.5437705 L5.74798603,15.5437705 Z" id="Triangle-Copy-3" fill="#FFFFFF" transform="translate(3.5, 16.5) rotate(-90) translate(-3.5, -16.5)"></path>
+    </g>
+</svg>
