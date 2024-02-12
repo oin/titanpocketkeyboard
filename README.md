@@ -11,10 +11,12 @@ In its current version, it does not have any user interface or settings, and it 
 # Features
 
 - Full keyboard layout with all keys and symbols.
+- No space taken on the screen.
 - Long press for alternate characters (see list below).
 - Multiple key presses (in quick succession) for accented characters, and other alternate symbols (see list below).
 - Keyboard navigation, simulating arrow keys and home/end/page up/page down keys, using the `sym` modifier.
 - Lock modifier keys by double-tapping them, while a single tap will only have effect for the next key press.
+- See modifier key state in the status bar.
 - Auto-capitalization of the first letter of a sentence.
 - Two spaces after a period automatically replaced by a period and a space.
 
