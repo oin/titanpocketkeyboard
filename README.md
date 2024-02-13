@@ -3,6 +3,8 @@
 In its current version, it does not have any user interface, and it is optimized for the French language in QWERTY (following the labels), as well as English, Spanish, Portuguese, and German.
 It can also fit other languages such as Italian and Dutch.
 
+https://github.com/oin/titanpocketkeyboard/assets/433830/59be4e0c-d9e0-4350-939b-1fdef5572e33
+
 # Installation
 
 1. Download the latest APK from the [releases](https://github.com/oin/TitanPocketKeyboard/releases) page.
