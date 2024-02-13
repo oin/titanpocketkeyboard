@@ -7,6 +7,16 @@ package io.github.oin.titanpocketkeyboard
  *  - double press to lock until the next press of this modifier
  */
 class Modifier {
+	/**
+	 * The maximum time of a double press needed to lock a modifier, in milliseconds.
+	 */
+	var lockThreshold = 250
+
+	/**
+	 * The minimum time of a long press needed to apply the modifier until it is released, in milliseconds.
+	 */
+	var nextThreshold = 350
+
 	private var held = false
 	private var lock = false
 	private var next = false
@@ -35,7 +45,7 @@ class Modifier {
 		held = true
 
 		val t = System.currentTimeMillis()
-		if(t - lastTime < 250) {
+		if(t - lastTime < lockThreshold) {
 			lock = !lock
 			preventNext = true
 		} else {
@@ -46,7 +56,7 @@ class Modifier {
 	}
 	fun onKeyUp() {
 		val t = System.currentTimeMillis()
-		next = !lock && t - lastTime < 350 && !preventNext
+		next = !lock && t - lastTime < nextThreshold && !preventNext
 		preventNext = false
 		held = false
 	}
@@ -66,6 +76,8 @@ class Modifier {
  *  - press to lock until the next press of this modifier
  */
 class SimpleModifier {
+	var lockThreshold = 350
+
 	private var held = false
 	private var lock = false
 	private var lastTime: Long = 0
@@ -95,7 +107,7 @@ class SimpleModifier {
 	}
 	fun onKeyUp() {
 		val t = System.currentTimeMillis()
-		if(t - lastTime > 350) {
+		if(t - lastTime > lockThreshold) {
 			lock = false
 		}
 		held = false

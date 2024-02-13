@@ -46,7 +46,20 @@ const val MPSUBST_STR_DOTSPACE = '\uFFF6'
 /**
  * A controller for the Multipress functionality
  */
-class MultipressController(private val substitutions: Array<HashMap<Int, Array<Char>>>) {
+class MultipressController(val substitutions: Array<HashMap<Int, Array<Char>>>) {
+	/**
+	 * The maximum time for a subsequent press to be interpreted as a multipress, in milliseconds.
+	 */
+	var multipressThreshold = 750
+	/**
+	 * Whether to ignore the first level of multipresses.
+	 */
+	var ignoreFirstLevel = false
+	/**
+	 * Whether to ignore `MPSUBST_STR_DOTSPACE`.
+	 */
+	var ignoreDotSpace = false
+
 	private var last: Int = 0
 	private var lastTime: Long = 0
 	private var count: Int = 1
@@ -71,8 +84,7 @@ class MultipressController(private val substitutions: Array<HashMap<Int, Array<C
 	fun process(e: KeyEvent, metaState: Int): Char {
 		val keyCode = e.keyCode
 		val t = System.currentTimeMillis()
-		if(last == keyCode && t - lastTime < 750) {
-			last = keyCode
+		if(last == keyCode && t - lastTime < multipressThreshold) {
 			lastTime = t
 
 			if(e.repeatCount == 1) {
@@ -124,6 +136,13 @@ class MultipressController(private val substitutions: Array<HashMap<Int, Array<C
 				++count
 				if(count >= subst.size) {
 					count = 0
+				}
+
+				if(substitution != MPSUBST_STR_DOTSPACE && ignoreFirstLevel && longPressCount == 0) {
+					return MPSUBST_BYPASS
+				}
+				if(substitution == MPSUBST_STR_DOTSPACE && ignoreDotSpace) {
+					return MPSUBST_BYPASS
 				}
 
 				if(lastSubstitution == substitution) {

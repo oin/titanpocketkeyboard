@@ -1,0 +1,68 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+	<PreferenceCategory android:title="General">
+		<SwitchPreference
+			android:key="AutoCapitalize"
+			android:defaultValue="true"
+			android:title="Auto-capitalize"
+			android:summary="Start the first word of a sentence with a capital letter"
+			/>
+		<SwitchPreference
+			android:key="DotSpace"
+			android:defaultValue="true"
+			android:title="Period with double-space"
+			android:summary="Type two spaces in sequence to create a period"
+			/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Accented characters">
+		<SwitchPreference
+			android:key="UseFirstLevel"
+			android:defaultValue="true"
+			android:title="Enable"
+			android:summary="Enable accented characters by multipressing vowels"
+			/>
+		<ListPreference
+			android:key="FirstLevelTemplate"
+			android:defaultValue="fr"
+			android:title="Template"
+			android:summary="%s"
+			android:entries="@array/first_level_template"
+			android:entryValues="@array/first_level_template_values"
+			/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Timing">
+		<SeekBarPreference
+			android:key="MultipressThreshold"
+			android:title="Multipress threshold (ms)"
+			android:summary="The time after which the next press is considered separate (default: 750)"
+			android:defaultValue="750"
+			android:min="5"
+			android:max="3000"
+			app:showSeekBarValue="true"
+			/>
+		<SeekBarPreference
+			android:key="ModifierLockThreshold"
+			android:defaultValue="250"
+			android:title="Modifier lock threshold (ms)"
+			android:summary="The maximum time of a double press needed to lock a modifier (default: 250)"
+			android:min="50"
+			android:max="1000"
+			app:showSeekBarValue="true"
+			/>
+		<SeekBarPreference
+			android:key="ModifierNextThreshold"
+			android:title="Modifier long press threshold (ms)"
+			android:summary="The minimum time of a long press needed to apply the modifier until it is released (default: 350)"
+			android:defaultValue="350"
+			android:min="50"
+			android:max="1000"
+			app:showSeekBarValue="true"
+			/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Other">
+		<Preference
+			android:key="Reset"
+			android:title="Reset to defaults"
+			/>
+	</PreferenceCategory>
+</PreferenceScreen>

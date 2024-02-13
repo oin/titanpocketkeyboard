@@ -1,0 +1,18 @@
+<resources>
+	<string-array name="first_level_template">
+		<item>French</item>
+		<item>Spanish</item>
+		<item>German</item>
+		<item>Portuguese</item>
+		<item>áàâäã</item>
+		<item>àáâäã</item>
+	</string-array>
+	<string-array name="first_level_template_values">
+		<item>fr</item>
+		<item>es</item>
+		<item>de</item>
+		<item>pt</item>
+		<item>order1</item>
+		<item>order2</item>
+	</string-array>
+</resources>

@@ -5,11 +5,12 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.text.InputType
 import android.text.TextUtils
+import android.util.Log
 import android.view.InputDevice
 import android.view.KeyCharacterMap
 import android.view.KeyEvent
-import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.preference.PreferenceManager
 import java.util.Locale
 import android.inputmethodservice.InputMethodService as AndroidInputMethodService
 
@@ -39,25 +40,70 @@ fun makeKeyEvent(original: KeyEvent, code: Int, metaState: Int, action: Int, sou
 	return KeyEvent(original.downTime, original.eventTime, action, code, original.repeatCount, metaState, KeyCharacterMap.VIRTUAL_KEYBOARD, code, 0, source)
 }
 
+val templates = hashMapOf(
+	"fr" to hashMapOf(
+		KeyEvent.KEYCODE_A to arrayOf('`', '^', '´', '¨', '~', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_E to arrayOf('´', '`', '^', '¨', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_I to arrayOf('^', '´', '¨', '`', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_O to arrayOf('^', '´', '`', '¨', '~', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_U to arrayOf('`', '^', '´', '¨', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_C to arrayOf('ç', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_SPACE to arrayOf(MPSUBST_STR_DOTSPACE)
+	),
+	"es" to hashMapOf(
+		KeyEvent.KEYCODE_A to arrayOf('´', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_E to arrayOf('´', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_I to arrayOf('´', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_O to arrayOf('´', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_U to arrayOf('´', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_SPACE to arrayOf(MPSUBST_STR_DOTSPACE)
+	),
+	"de" to hashMapOf(
+		KeyEvent.KEYCODE_A to arrayOf('¨', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_O to arrayOf('¨', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_U to arrayOf('¨', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_SPACE to arrayOf(MPSUBST_STR_DOTSPACE)
+	),
+	"pt" to hashMapOf(
+		KeyEvent.KEYCODE_A to arrayOf('´', '^', '`', '~', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_E to arrayOf('´', '^', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_I to arrayOf('´', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_O to arrayOf('´', '^', '~', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_U to arrayOf('´', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_C to arrayOf('ç', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_SPACE to arrayOf(MPSUBST_STR_DOTSPACE)
+	),
+	"order1" to hashMapOf( // áàâäã
+		KeyEvent.KEYCODE_A to arrayOf('´', '`', '^', '¨', '~', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_E to arrayOf('´', '`', '^', '¨', '~', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_I to arrayOf('´', '`', '^', '¨', '~', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_O to arrayOf('´', '`', '^', '¨', '~', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_U to arrayOf('´', '`', '^', '¨', '~', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_SPACE to arrayOf(MPSUBST_STR_DOTSPACE)
+	),
+	"order2" to hashMapOf( // àáâäã
+		KeyEvent.KEYCODE_A to arrayOf('`', '´', '^', '¨', '~', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_E to arrayOf('`', '´', '^', '¨', '~', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_I to arrayOf('`', '´', '^', '¨', '~', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_O to arrayOf('`', '´', '^', '¨', '~', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_U to arrayOf('`', '´', '^', '¨', '~', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_SPACE to arrayOf(MPSUBST_STR_DOTSPACE)
+	)
+)
+
 class InputMethodService : AndroidInputMethodService() {
 	private lateinit var vibrator: Vibrator
-	private lateinit var inputView: View
 	private val shift = Modifier()
 	private val alt = Modifier()
 	private val sym = SimpleModifier()
 	private var lastShift = false
 	private var lastAlt = false
 	private var lastSym = false
+
+	private var autoCapitalize = false
+
 	private val multipress = MultipressController(arrayOf(
-		hashMapOf(
-			KeyEvent.KEYCODE_A to arrayOf('`', '^', '´', '¨', '~', MPSUBST_BYPASS),
-			KeyEvent.KEYCODE_E to arrayOf('´', '`', '^', '¨', MPSUBST_BYPASS),
-			KeyEvent.KEYCODE_I to arrayOf('^', '´', '¨', '`', MPSUBST_BYPASS),
-			KeyEvent.KEYCODE_O to arrayOf('^', '´', '`', '¨', '~', MPSUBST_BYPASS),
-			KeyEvent.KEYCODE_U to arrayOf('`', '^', '´', '¨', MPSUBST_BYPASS),
-			KeyEvent.KEYCODE_C to arrayOf('ç', MPSUBST_BYPASS),
-			KeyEvent.KEYCODE_SPACE to arrayOf(MPSUBST_STR_DOTSPACE)
-		),
+		templates["fr"]!!,
 		hashMapOf(
 			KeyEvent.KEYCODE_Q to arrayOf(MPSUBST_TOGGLE_ALT, '°', MPSUBST_TOGGLE_SHIFT, MPSUBST_BYPASS),
 			KeyEvent.KEYCODE_W to arrayOf(MPSUBST_TOGGLE_ALT, '&', '↑', MPSUBST_TOGGLE_SHIFT, MPSUBST_BYPASS),
@@ -92,10 +138,18 @@ class InputMethodService : AndroidInputMethodService() {
 	override fun onCreate() {
 		super.onCreate()
 		vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+
+		val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+		preferences.registerOnSharedPreferenceChangeListener { preferences, key ->
+			updateFromPreferences()
+		}
+		updateFromPreferences()
 	}
 
 	override fun onStartInput(attribute: EditorInfo?, restarting: Boolean) {
 		super.onStartInput(attribute, restarting)
+
+		updateFromPreferences()
 
 		if(!sym.get()) {
 			updateAutoCapitalization()
@@ -233,16 +287,6 @@ class InputMethodService : AndroidInputMethodService() {
 	 */
 	private fun onSymKey(event: KeyEvent, pressed: Boolean): Boolean {
 
-		// Some keys have special handling
-//		when(event.keyCode) {
-//			in arrayOf(KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_DEL, KeyEvent.KEYCODE_CTRL_LEFT, KeyEvent.KEYCODE_CTRL_RIGHT, KeyEvent.KEYCODE_BACK) -> {
-//				if(pressed) {
-//					super.onKeyDown(event.keyCode, event)
-//				} else {
-//					super.onKeyUp(event.keyCode, event)
-//				}
-//			}
-//		}
 		// The SPACE key is equivalent to hitting Shift
 		if(event.keyCode == KeyEvent.KEYCODE_SPACE) {
 			if(pressed) {
@@ -388,6 +432,9 @@ class InputMethodService : AndroidInputMethodService() {
 	 * Update the Shift modifier state for auto-capitalization.
 	 */
 	private fun updateAutoCapitalization() {
+		if(!autoCapitalize) {
+			return
+		}
 		if(currentInputEditorInfo == null || currentInputConnection == null) {
 			return
 		}
@@ -431,6 +478,33 @@ class InputMethodService : AndroidInputMethodService() {
 			}
 		} else if(!sym.get() && lastSym) {
 			updateAutoCapitalization()
+		}
+	}
+
+	/**
+	 * Update values from the preferences.
+	 */
+	private fun updateFromPreferences() {
+		val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+
+		autoCapitalize = preferences.getBoolean("AutoCapitalize", true)
+
+		val lockThreshold = preferences.getInt("ModifierLockThreshold", 250)
+		shift.lockThreshold = lockThreshold
+		alt.lockThreshold = lockThreshold
+		sym.lockThreshold = lockThreshold
+
+		val nextThreshold = preferences.getInt("ModifierNextThreshold", 350)
+		shift.nextThreshold = nextThreshold
+		alt.nextThreshold = nextThreshold
+
+		multipress.multipressThreshold = preferences.getInt("MultipressThreshold", 750)
+		multipress.ignoreFirstLevel = !preferences.getBoolean("UseFirstLevel", true)
+		multipress.ignoreDotSpace = !preferences.getBoolean("DotSpace", true)
+
+		val templateId = preferences.getString("FirstLevelTemplate", "fr")
+		if(templates.containsKey(templateId)) {
+			multipress.substitutions[0] = templates[templateId]!!
 		}
 	}
 }

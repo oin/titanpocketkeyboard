@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="108px" height="108px" viewBox="0 0 108 108" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_launcher_background</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="98.1288243%" id="linearGradient-1">
+            <stop stop-color="#8702D9" offset="0%"></stop>
+            <stop stop-color="#10075D" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="ic_launcher_background" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="url(#linearGradient-1)" x="0" y="0" width="108" height="108"></rect>
+    </g>
+</svg>
