@@ -19,15 +19,21 @@
 			android:key="UseFirstLevel"
 			android:defaultValue="true"
 			android:title="Enable"
-			android:summary="Enable accented characters by multipressing vowels"
+			android:summary="Enable accented characters by multipressing (mostly) vowels"
 			/>
 		<ListPreference
 			android:key="FirstLevelTemplate"
-			android:defaultValue="fr"
+			android:defaultValue="fr-ext"
 			android:title="Template"
 			android:summary="%s"
 			android:entries="@array/first_level_template"
 			android:entryValues="@array/first_level_template_values"
+			/>
+		<SwitchPreference
+			android:key="FirstLevelOnlyVowels"
+			android:defaultValue="false"
+			android:title="Only vowels"
+			android:summary="Disable multipress for consonants (like ç or ß)"
 			/>
 	</PreferenceCategory>
 	<PreferenceCategory android:title="Timing">

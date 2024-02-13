@@ -42,11 +42,22 @@ fun makeKeyEvent(original: KeyEvent, code: Int, metaState: Int, action: Int, sou
 
 val templates = hashMapOf(
 	"fr" to hashMapOf(
-		KeyEvent.KEYCODE_A to arrayOf('`', '^', '´', '¨', '~', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_A to arrayOf('`', '^', 'æ', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_E to arrayOf('´', '`', '^', '¨', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_I to arrayOf('^', '¨', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_O to arrayOf('^', 'œ', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_U to arrayOf('`', '^', '¨', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_Y to arrayOf('¨', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_C to arrayOf('ç', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_SPACE to arrayOf(MPSUBST_STR_DOTSPACE)
+	),
+	"fr-ext" to hashMapOf(
+		KeyEvent.KEYCODE_A to arrayOf('`', '^', '´', '¨', 'æ', '~', MPSUBST_BYPASS),
 		KeyEvent.KEYCODE_E to arrayOf('´', '`', '^', '¨', MPSUBST_BYPASS),
 		KeyEvent.KEYCODE_I to arrayOf('^', '´', '¨', '`', MPSUBST_BYPASS),
-		KeyEvent.KEYCODE_O to arrayOf('^', '´', '`', '¨', '~', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_O to arrayOf('^', '´', 'œ', '¨', '~', '`', MPSUBST_BYPASS),
 		KeyEvent.KEYCODE_U to arrayOf('`', '^', '´', '¨', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_Y to arrayOf('¨', MPSUBST_BYPASS),
 		KeyEvent.KEYCODE_C to arrayOf('ç', MPSUBST_BYPASS),
 		KeyEvent.KEYCODE_SPACE to arrayOf(MPSUBST_STR_DOTSPACE)
 	),
@@ -62,6 +73,7 @@ val templates = hashMapOf(
 		KeyEvent.KEYCODE_A to arrayOf('¨', MPSUBST_BYPASS),
 		KeyEvent.KEYCODE_O to arrayOf('¨', MPSUBST_BYPASS),
 		KeyEvent.KEYCODE_U to arrayOf('¨', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_S to arrayOf('ß', MPSUBST_BYPASS),
 		KeyEvent.KEYCODE_SPACE to arrayOf(MPSUBST_STR_DOTSPACE)
 	),
 	"pt" to hashMapOf(
@@ -103,7 +115,7 @@ class InputMethodService : AndroidInputMethodService() {
 	private var autoCapitalize = false
 
 	private val multipress = MultipressController(arrayOf(
-		templates["fr"]!!,
+		templates["fr-ext"]!!,
 		hashMapOf(
 			KeyEvent.KEYCODE_Q to arrayOf(MPSUBST_TOGGLE_ALT, '°', MPSUBST_TOGGLE_SHIFT, MPSUBST_BYPASS),
 			KeyEvent.KEYCODE_W to arrayOf(MPSUBST_TOGGLE_ALT, '&', '↑', MPSUBST_TOGGLE_SHIFT, MPSUBST_BYPASS),
@@ -126,7 +138,7 @@ class InputMethodService : AndroidInputMethodService() {
 			KeyEvent.KEYCODE_L to arrayOf(MPSUBST_TOGGLE_ALT, MPSUBST_BACKTICK, MPSUBST_TOGGLE_SHIFT, MPSUBST_BYPASS),
 			KeyEvent.KEYCODE_Z to arrayOf(MPSUBST_TOGGLE_ALT, '¡', '‽', MPSUBST_TOGGLE_SHIFT, MPSUBST_BYPASS),
 			KeyEvent.KEYCODE_X to arrayOf(MPSUBST_TOGGLE_ALT, '×', 'χ', MPSUBST_TOGGLE_SHIFT, MPSUBST_BYPASS),
-			KeyEvent.KEYCODE_C to arrayOf(MPSUBST_TOGGLE_ALT, '©', '¢', '⊂', '⊄', '⊃', '⊅', MPSUBST_TOGGLE_SHIFT, MPSUBST_BYPASS),
+			KeyEvent.KEYCODE_C to arrayOf(MPSUBST_TOGGLE_ALT, 'ç', '©', '¢', '⊂', '⊄', '⊃', '⊅', MPSUBST_TOGGLE_SHIFT, MPSUBST_BYPASS),
 			KeyEvent.KEYCODE_V to arrayOf(MPSUBST_TOGGLE_ALT, '∀', '√', MPSUBST_TOGGLE_SHIFT, MPSUBST_BYPASS),
 			KeyEvent.KEYCODE_B to arrayOf(MPSUBST_TOGGLE_ALT, '…', 'ß', '∫', '♭', MPSUBST_TOGGLE_SHIFT, MPSUBST_BYPASS),
 			KeyEvent.KEYCODE_N to arrayOf(MPSUBST_TOGGLE_ALT, '~', '¬', '∩', MPSUBST_TOGGLE_SHIFT, MPSUBST_BYPASS),
@@ -501,6 +513,7 @@ class InputMethodService : AndroidInputMethodService() {
 		multipress.multipressThreshold = preferences.getInt("MultipressThreshold", 750)
 		multipress.ignoreFirstLevel = !preferences.getBoolean("UseFirstLevel", true)
 		multipress.ignoreDotSpace = !preferences.getBoolean("DotSpace", true)
+		multipress.ignoreConsonantsOnFirstLevel = preferences.getBoolean("FirstLevelOnlyVowels", false)
 
 		val templateId = preferences.getString("FirstLevelTemplate", "fr")
 		if(templates.containsKey(templateId)) {

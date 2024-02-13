@@ -4,6 +4,7 @@
 		<item>Spanish</item>
 		<item>German</item>
 		<item>Portuguese</item>
+		<item>French+ES/DE/PT</item>
 		<item>áàâäã</item>
 		<item>àáâäã</item>
 	</string-array>
@@ -12,6 +13,7 @@
 		<item>es</item>
 		<item>de</item>
 		<item>pt</item>
+		<item>fr-ext</item>
 		<item>order1</item>
 		<item>order2</item>
 	</string-array>

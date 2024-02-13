@@ -24,48 +24,129 @@ In its current version, it does not have any user interface or settings, and it 
 
 The keyboard layout is based on the QWERTY layout of the Unihertz Titan Pocket, extended to allow access to most characters and symbols expected on a full-sized keyboard.
 
+## Accented characters
+
+You can select a template that specifies the characters that can be accessed by multiple key presses in quick succession (_multipress_).
+There is an option to disable the multipress feature for consonants.
+
+### French
+
+| Key | Multipress |
+| --- | --- |
+| `a` | `à`, `â`, `æ` |
+| `e` | `é`, `è`, `ê`, `ë` |
+| `i` | `î`, `ï` |
+| `o` | `ô`, `œ` |
+| `u` | `ù`, `û`, `ü` |
+| `y` | `ÿ` |
+| `c` | `ç` |
+
+### Spanish
+
+| Key | Multipress |
+| --- | --- |
+| `a` | `á` |
+| `e` | `é` |
+| `i` | `í` |
+| `o` | `ó` |
+| `u` | `ú` |
+
+### German
+
+| Key | Multipress |
+| --- | --- |
+| `a` | `ä` |
+| `o` | `ö` |
+| `u` | `ü` |
+| `s` | `ß` |
+
+### Portuguese
+
+| Key | Multipress |
+| --- | --- |
+| `a` | `á`, `â`, `à`, `ã` |
+| `e` | `é`, `ê` |
+| `i` | `í` |
+| `o` | `ó`, `ô`, `õ` |
+| `u` | `ú` |
+| `c` | `ç` |
+
+### French + ES/DE/PT (default)
+
+| Key | Multipress |
+| --- | --- |
+| `a` | `à`, `â`, `á`, `ä`, `ã` |
+| `e` | `é`, `è`, `ê`, `ë` |
+| `i` | `î`, `í`, `ï`, `ì` |
+| `o` | `ô`, `ó`, `ò`, `ö`, `õ` |
+| `u` | `ù`, `û`, `ú`, `ü` |
+| `c` | `ç` |
+
+### áàâäã
+
+| Key | Multipress |
+| --- | --- |
+| `a` | `á`, `à`, `â`, `ä`, `ã` |
+| `e` | `é`, `è`, `ê`, `ë`, `ẽ` |
+| `i` | `í`, `ì`, `î`, `ï`, `ĩ` |
+| `o` | `ó`, `ò`, `ô`, `ö`, `õ` |
+| `u` | `ú`, `ù`, `û`, `ü`, `ũ` |
+
+### àáâäã
+
+| Key | Multipress |
+| --- | --- |
+| `a` | `à`, `á`, `â`, `ä`, `ã` |
+| `e` | `è`, `é`, `ê`, `ë`, `ẽ` |
+| `i` | `ì`, `í`, `î`, `ï`, `ĩ` |
+| `o` | `ò`, `ó`, `ô`, `ö`, `õ` |
+| `u` | `ù`, `ú`, `û`, `ü`, `ũ` |
+
 ## Additional characters
 
-The following table shows the characters that can be accessed by multiple key presses in quick succession (_multipress_), as well as the characters accessible using a long press (and subsequent multipresses).
+The following table shows the characters that can be accessed with a long press and subsequent multipresses.
 The characters in bold are the ones that are marked on the labels of the keys.
 
-| Key | Multipress | Long press | `sym` modifier |
-| --- | --- | --- | --- |
-| **`q`** |  | **`0`**, `°` (degree) | _Tab_ |
-| **`w`** |  | **`1`**, `&`, `↑` | _Up arrow_ |
-| **`e`** | `é`, `è`, `ê`, `ë` | **`2`**, `€`, `∃` | `€` |
-| **`r`** |  | **`3`**, `®` | |
-| **`t`** |  | **`(`**, `[`, `{`, `<`, `≤`, `†`, `™` | |
-| **`y`** |  | **`)`**, `]`, `}`, `>`, `≥` | _Home_ |
-| **`u`** | `ù`, `û`, `ú`, `ü` | **`-`**, `–` (em dash), `–` (en dash), `∪` | _Page down_ |
-| **`i`** | `î`, `í`, `ï`, `ì` | **`_`**, `\|` | _Page up_ |
-| **`o`** | `ô`, `ó`, `ò`, `ö`, `õ` | **`/`**, `\`, `œ`, `º` (masc. ordinal), `÷` | _End_ |
-| **`p`** |  | **`:`**, `;`, `¶` | _Escape_ |
-| | | |
-| **`a`** | `à`, `â`, `á`, `ä`, `ã` | **`@`**, `æ`, `ª`, `←` | _Left arrow_ |
-| **`s`** |  | **`4`**, `ß`, `§`, `↓` | _Down arrow_ |
-| **`d`** |  | **`5`**, `∂`, `→`, `⇒` | _Right arrow_ |
-| **`f`** |  | **`6`**, `^` | |
-| **`g`** |  | **`*`**, `•`, `·` | |
-| **`h`** |  | **`#`**, `²`, `♯` | _Left arrow_ |
-| **`j`** |  | **`+`**, `=`, `≠`, `≈`, `±` | _Down arrow_ |
-| **`k`** |  | **`"`**, `%`, `‰`, `‱` | _Up arrow_ |
-| **`l`** |  | **`'`**, `` ` `` | _Right arrow_ |
-| | | |
-| **`z`** |  | **`!`**, `¡`, `‽` | _Tab_ |
-| **`x`** |  | **`7`**, `×`, `χ` | _Cut_* |
-| **`c`** |  | **`8`**, `©`, `¢`, `⊂`, `⊄`, `⊃`, `⊅` | _Copy_* |
-| **`v`** |  | **`9`**, `∀`, `√` | _Paste_* |
-| **` ` (space bar)** |  | `	` (tab), | _Shift modifier_ |
-| **`b`** |  | **`.`**, `…`, `ß`, `∫`, `♭` | `$` |
-| **`n`** |  | **`,`**, `ñ`, `¬`, `∩` | `=` |
-| **`m`** |  | **`?`**, `$`, `€`, `£`, `¿` | `%` |
-
-_* The Cut/Copy/Paste actions are only available when no modifier is pressed._
+| Key | Long press |
+| --- | --- |
+| **`q`** | **`0`**, `°` (degree) |
+| **`w`** | **`1`**, `&`, `↑` |
+| **`e`** | **`2`**, `€`, `∃` |
+| **`r`** | **`3`**, `®` |
+| **`t`** | **`(`**, `[`, `{`, `<`, `≤`, `†`, `™` |
+| **`y`** | **`)`**, `]`, `}`, `>`, `≥` |
+| **`u`** | **`-`**, `–` (em dash), `–` (en dash), `∪` |
+| **`i`** | **`_`**, `\|` |
+| **`o`** | `ô`, `ó`, `ò`, `ö`, `õ` | **`/`**, `\`, `œ`, `º` (masc. ordinal), `÷` |
+| **`p`** | **`:`**, `;`, `¶` |
+| | |
+| **`a`** | **`@`**, `æ`, `ª`, `←` |
+| **`s`** | **`4`**, `ß`, `§`, `↓` |
+| **`d`** | **`5`**, `∂`, `→`, `⇒` |
+| **`f`** | **`6`**, `^` |
+| **`g`** | **`*`**, `•`, `·` |
+| **`h`** | **`#`**, `²`, `♯` |
+| **`j`** | **`+`**, `=`, `≠`, `≈`, `±` |
+| **`k`** | **`"`**, `%`, `‰`, `‱` |
+| **`l`** | **`'`**, `` ` `` |
+| | |
+| **`z`** | **`!`**, `¡`, `‽` |
+| **`x`** | **`7`**, `×`, `χ` |
+| **`c`** | **`8`**, `ç` `©`, `¢`, `⊂`, `⊄`, `⊃`, `⊅` |
+| **`v`** | **`9`**, `∀`, `√` |
+| **` ` (space bar)** | `	` (tab), |
+| **`b`** | **`.`**, `…`, `ß`, `∫`, `♭` |
+| **`n`** | **`,`**, `ñ`, `¬`, `∩` |
+| **`m`** | **`?`**, `$`, `€`, `£`, `¿` |
 
 ## `sym` modifier map
 
+Using the `sym` modifier, you can access more keys and symbols.
+For instance, you can use `WASD` or `HJKL` to navigate in text.
+
 ![`sym` modifier map](readme-symbehavior.png)
+
+The Cut/Copy/Paste actions are only available when no modifier is pressed.
 
 # Customizing and contributing
 

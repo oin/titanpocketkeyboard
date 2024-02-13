@@ -59,6 +59,10 @@ class MultipressController(val substitutions: Array<HashMap<Int, Array<Char>>>) 
 	 * Whether to ignore `MPSUBST_STR_DOTSPACE`.
 	 */
 	var ignoreDotSpace = false
+	/**
+	 * Whether to ignore consonants on the first level.
+	 */
+	var ignoreConsonantsOnFirstLevel = false
 
 	private var last: Int = 0
 	private var lastTime: Long = 0
@@ -96,6 +100,11 @@ class MultipressController(val substitutions: Array<HashMap<Int, Array<Char>>>) 
 
 			if(longPressCount >= substitutions.size) {
 				longPressCount = 0
+			}
+
+			//FIXME: Rather than doing this, mark these undesirables another way
+			if(ignoreConsonantsOnFirstLevel && longPressCount == 0 && keyCode in arrayOf(KeyEvent.KEYCODE_C, KeyEvent.KEYCODE_S)) {
+				return MPSUBST_BYPASS
 			}
 
 			val map = substitutions[longPressCount]
