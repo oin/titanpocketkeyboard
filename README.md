@@ -1,6 +1,7 @@
 **TitanPocketKeyboard** is an Android input method that entirely relies on the embedded keyboard of the Unihertz Titan Pocket and provides most features expected on a full-sized keyboard.
 
-In its current version, it does not have any user interface or settings, and it is optimized for the French language in QWERTY (following the labels), but it should be useful too for the English, Spanish, Portuguese, Italian, German and Dutch languages.
+In its current version, it does not have any user interface, and it is optimized for the French language in QWERTY (following the labels), as well as English, Spanish, Portuguese, and German.
+It can also fit other languages such as Italian and Dutch.
 
 # Installation
 
