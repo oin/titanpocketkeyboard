@@ -61,6 +61,22 @@ val templates = hashMapOf(
 		KeyEvent.KEYCODE_C to arrayOf('ç', MPSUBST_BYPASS),
 		KeyEvent.KEYCODE_SPACE to arrayOf(MPSUBST_STR_DOTSPACE)
 	),
+	"cz" to hashMapOf(
+		KeyEvent.KEYCODE_A to arrayOf('´', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_C to arrayOf('ˇ', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_D to arrayOf('´', 'ˇ', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_E to arrayOf('´', 'ˇ', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_I to arrayOf('´', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_N to arrayOf('ˇ', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_O to arrayOf('´', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_R to arrayOf('ˇ', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_S to arrayOf('ˇ', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_T to arrayOf('´', 'ˇ', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_U to arrayOf('´', '°', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_Y to arrayOf('´', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_Z to arrayOf('ˇ', MPSUBST_BYPASS),
+		KeyEvent.KEYCODE_SPACE to arrayOf(MPSUBST_STR_DOTSPACE)
+	),
 	"es" to hashMapOf(
 		KeyEvent.KEYCODE_A to arrayOf('´', MPSUBST_BYPASS),
 		KeyEvent.KEYCODE_E to arrayOf('´', MPSUBST_BYPASS),
